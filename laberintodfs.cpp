@@ -22,9 +22,8 @@ vector<vector<bool>> visitadosResolver;
 int dirFila[] = {-2,2,0,0};     // Arriba y Abajo
 int dirColumna[] = {0,0,-2,2};  // Izquierda y Derecha
 
-
+/// Inicializa el tablero lleno de muros y todas las posiciones se encuentran como No visitadas.
 void inicializarTableroLleno(){
-    // Funcion para iniciar el tablero con el espacio lleno de muros y las celdas no visitadas
 
     // vector.assign(cantidad, valor)
     // Asignar nuevos valores al vector, reemplazando lo anterior
@@ -33,10 +32,14 @@ void inicializarTableroLleno(){
 
 }
 
+/// Coloca un carácter específico en una celda del tablero. 
 void posicionarCaracter( int fila, int columna, char caracter){
     tablero[fila][columna] = caracter;
 }
 
+/// Genera el laberinto usando DFS (Depth-First Search) recursivo.
+/// Parte desde una celda, marca como visitada, abre camino
+/// y continúa hacia direcciones aleatorias, rompiendo muros entre celdas.
 void abrirCaminoDFS(int x, int y){
     visitados[x][y] = true;     // Se marca la celda como visitada
     tablero[x][y] = '-';        // Se abre camino, ya no hay muro
@@ -63,6 +66,8 @@ void abrirCaminoDFS(int x, int y){
     }
 }
 
+/// Resuelve el laberinto usando DFS para encontrar una ruta desde 'E' hasta 'S'.
+/// Marca el camino correcto con 'x'. Usa backtracking cuando llega a un callejón sin salida.
 bool resolverDFS(int x, int y) {
     // Se crea un nuevo set de direcciones (Paso por paso)
     int dxf[] = {-1, 1, 0, 0}; // arriba, abajo, izquierda, derecha
@@ -98,7 +103,7 @@ bool resolverDFS(int x, int y) {
     return false;       // No se encontró la salida por este camino
 }
 
-/// Se define como se va a ver el tablero
+/// Imprime el estado actual del tablero en consola.
 void imprimirTablero(){
     for (int i = 0; i < filas; i++){
         for (int j = 0; j < columnas; j++){
@@ -108,7 +113,7 @@ void imprimirTablero(){
     }
 }
 
-// Se llama al main para llamar a las funciones necesarias
+// Punto de entrada principal del programa (donde se llama a las funciones necesarias)
 int main(){
     srand(time(0));
 
